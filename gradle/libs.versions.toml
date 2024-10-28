@@ -1,0 +1,14 @@
+[versions]
+kotlin = "2.0.21"
+kotest = "5.9.1"
+
+[libraries]
+
+# Kotest
+kotest-assertions-core-jvm = { group = "io.kotest", name = "kotest-assertions-core-jvm", version.ref = "kotest" }
+kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
+kotest-dataset = { group = "io.kotest", name = "kotest-framework-datatest", version.ref = "kotest" }
+kotest-runner-junit5-jvm = { group = "io.kotest", name = "kotest-runner-junit5-jvm", version.ref = "kotest" }
+
+[bundles]
+kotest = ["kotest-assertions-core-jvm", "kotest-property", "kotest-dataset", "kotest-runner-junit5-jvm"]
