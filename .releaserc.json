@@ -1,0 +1,28 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "feat/**",
+      "prerelease": "${name.replace(/[\\/_]/g, '-').toLowerCase()}"
+    },
+    {
+      "name": "fix/**",
+      "prerelease": "${name.replace(/[\\/_]/g, '-').toLowerCase()}"
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "build/libs/kotest-extensions-parallel.jar",
+            "label": "JAR"
+          }
+        ]
+      }
+    ]
+  ]
+}

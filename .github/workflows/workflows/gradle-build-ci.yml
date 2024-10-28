@@ -1,0 +1,47 @@
+name: Gradle Build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  application-build:
+    name: Build & Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: checkout
+        name: Checkout code
+        uses: actions/checkout@v4
+
+      - id: java-setup
+        name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: temurin
+
+      - id: gradle-setup
+        name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - id: build-with-gradle
+        name: Build with Gradle
+        run: ./gradlew build
+
+      - id: publish-test-results
+        name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            **/test-results/**/*.xml
